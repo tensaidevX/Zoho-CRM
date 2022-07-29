@@ -1,0 +1,50 @@
+.inputField {
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+}
+
+.inputField:nth-child(1) {
+  margin-top: 40px;
+}
+.inputField div {
+  width: 100%;
+}
+
+.loginBtn {
+  margin-top: 20px !important;
+  width: 85%;
+}
+
+.loginWrapper {
+  z-index: 10;
+  position: absolute;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.753);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  animation: popup linear 60ms;
+}
+
+.loginForm {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+  width: 400px;
+  background-color: white;
+}
+
+@keyframes popup {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,66 @@
+.signupForm {
+  display: flex;
+  margin-top: 40px;
+  font-family: Helvetica, sans-serif;
+  height: 500px;
+  width: 400px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px 10px whitesmoke;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputField {
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+}
+
+.inputField:nth-child(1) {
+  margin-top: 40px;
+}
+.inputField div {
+  width: 100%;
+}
+
+.signupForm button {
+  margin-top: 20px;
+  width: 85%;
+}
+
+.signupForm hr {
+  margin-top: 40px;
+  width: 80%;
+  border-top: solid 2px rgba(207, 205, 205, 0.468);
+}
+
+.errorMessage {
+  width: 85%;
+  text-align: left;
+  color: red;
+  font-size: 10px;
+  font-family: Helvetica, sans-serif;
+  animation: fadeInAnimation ease 0.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+p {
+  margin-top: 10px;
+}
+.loginBtn {
+  width: 50%;
+  margin-top: 10px !important;
+}

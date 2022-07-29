@@ -1,0 +1,20 @@
+.chartWrapper {
+  background-color: white;
+  width: max-content;
+  border-radius: 10px;
+  box-shadow: 1px 1px 8px 2px #8080806b;
+}
+
+.chartWrapper h1 {
+  text-align: center;
+  margin: 20px;
+  font-size: 1.5rem;
+  color: purple;
+  padding-top: 10px;
+  font-weight: 700;
+}
+
+.chart {
+  height: 65vh;
+  width: 60vw;
+}

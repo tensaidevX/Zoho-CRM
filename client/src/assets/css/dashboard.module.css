@@ -1,0 +1,135 @@
+.dashboard {
+  height: 100%;
+  width: 100%;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav {
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  width: 100%;
+  color: black;
+  display: flex;
+  font-size: 1.52rem;
+}
+
+.dashboardLogo {
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 700;
+  margin-left: 40px;
+}
+
+.profile {
+  margin: 10px;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: max-content;
+  padding: 2px;
+  border-radius: 10px;
+  border-image-slice: 1;
+}
+
+.profile img {
+  cursor: pointer;
+  border: solid 4px white;
+  margin-right: 10px;
+  height: 35px;
+  width: 35px;
+  border-radius: 20%;
+}
+.main {
+  display: flex;
+  width: 100vw;
+  align-items: center;
+  flex-direction: column;
+  height: 90vh;
+}
+
+.dashboardWrapper {
+  display: flex;
+  width: 100%;
+}
+
+.data {
+  height: 100%;
+  width: max-content;
+  display: flex;
+  border-radius: 10px;
+  max-height: max-content;
+  flex-direction: column;
+  margin: 20px 40px 20px 20px;
+}
+
+.tile {
+  margin-top: 40px;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  font-size: 2rem;
+  color: white;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background: #c33764; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #1d2671,
+    #c33764
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #1d2671,
+    #c33764
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.table {
+  height: max-content;
+  width: max-content;
+}
+
+.tableOptions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.tableOptions input {
+  height: 25px;
+  width: 25px;
+  margin: 5px;
+  font-size: 1rem;
+  padding: 5px;
+  display: flex;
+  text-align: center;
+}
+
+.tableOptions button {
+  margin: 10px;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px 2px rgb(218, 217, 217);
+  background-color: white;
+}
+
+.tableOptions button:hover {
+  background-color: rgb(179, 177, 177);
+  box-shadow: 1px 1px 5px 2px rgb(222, 221, 221);
+}

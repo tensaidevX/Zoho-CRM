@@ -1,0 +1,47 @@
+table {
+  border-radius: 4px;
+}
+
+tr {
+  height: 40px;
+  display: flex;
+}
+
+thead > tr {
+  background: #c33764; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #4255fd,
+    #fe5a8e
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #3848d8,
+    #da3d6f
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  border-radius: 10px 10px 0px 0px;
+}
+tr {
+  border: solid 1px whitesmoke;
+  background-color: rgba(255, 255, 255, 0.995);
+}
+th {
+  height: 40px;
+  width: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+td {
+  height: 40px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+td:nth-child(1) {
+  color: blue;
+}
