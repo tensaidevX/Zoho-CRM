@@ -10,6 +10,6 @@ const LeadSchema = new mongoose.Schema({
   },
 });
 
-const Lesson = mongoose.model("Lesson", LessonSchema);
+const Lead = mongoose.model("Lead", LeadSchema);
 
-module.exports = Lesson;
+module.exports = Lead;

@@ -5,31 +5,29 @@ import Styles from "../assets/css/chart.module.css";
 Chart.register(...registerables);
 
 const DynamicChart = (props) => {
+  let [leadSources, setLeadSources] = useState([]);
+  let [leadSourceValues, setleadSourceValues] = useState([]);
   const [chartData, setChartData] = useState({});
 
-  const Chart = (data) => {
-    let lead_sources = [];
-    let source_data = {};
-    let final_data = [];
-    data.forEach((element) => {
-      if (lead_sources.indexOf(element.Lead_Source) !== -1) {
-        source_data[element.Lead_Source] += 1;
-      } else {
-        lead_sources.push(element.Lead_Source);
-        source_data[element.Lead_Source] = 1;
-      }
-    });
+  useEffect(() => {
+    let sources = [];
+    let dataset = [];
 
-    for (let elem of lead_sources) {
-      final_data.push(+source_data[elem]);
+    for (let key in props.data) {
+      sources.push(key);
+      dataset.push(props.data[key]);
     }
+    setLeadSources(sources);
+    setleadSourceValues(dataset);
+  }, [props.data]);
 
+  useEffect(() => {
     setChartData({
-      labels: lead_sources,
+      labels: leadSources,
       datasets: [
         {
           label: "Number of leads",
-          data: final_data,
+          data: leadSourceValues,
           backgroundColor: [
             "rgba(88, 24, 69)",
             "rgba(255, 195, 0,1)",
@@ -89,10 +87,7 @@ const DynamicChart = (props) => {
         },
       ],
     });
-  };
-  useEffect(() => {
-    Chart(props.data);
-  }, [props]);
+  }, [leadSourceValues, leadSources]);
   return (
     <div className={Styles.chartWrapper}>
       <h1>Top Lead Sources</h1>

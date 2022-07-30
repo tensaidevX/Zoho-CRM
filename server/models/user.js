@@ -12,6 +12,11 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  avatar: {
+    type: String,
+    default:
+      "https://emedia1.nhs.wales/HEIW2/cache/file/F4C33EF0-69EE-4445-94018B01ADCF6FD4_medium.png",
+  },
   hash: String,
   salt: String,
 });

@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import styles from "../assets/css/login.module.css";
 import { validateEmail } from "../utils";
+import { login } from "../api";
 export default function Login(props) {
   let [userDetails, setUserDetails] = useState({
     email: "",
@@ -18,7 +19,7 @@ export default function Login(props) {
     }));
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     let { email, password } = userDetails;
 
     if (!email || !password) {
@@ -27,7 +28,19 @@ export default function Login(props) {
     }
 
     if (validateEmail(userDetails.email)) {
-      toast.success("User Signed in Succesfully");
+      let response = await login(userDetails);
+      if (response.success) {
+        localStorage.setItem("token", response.data.data);
+        toast.success("User Signed in Succesfully");
+        window.location.href = "/dashboard";
+      }
+      if (response.message && response.message === "Incorrect Password") {
+        toast.error("Incorrect Password");
+      }
+
+      if (response && response.message === "User not Found") {
+        toast.error("User not found");
+      }
     } else {
       toast.error("Please enter valid email");
       return;

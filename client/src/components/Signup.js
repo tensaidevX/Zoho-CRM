@@ -4,6 +4,8 @@ import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import styles from "../assets/css/signup.module.css";
 import { validateEmail } from "../utils";
+import { register } from "../api";
+
 export default function Signup(props) {
   let [userDetails, setUserDetails] = useState({
     name: "",
@@ -20,7 +22,7 @@ export default function Signup(props) {
     }));
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     let { email, password, confirmPassword, name } = userDetails;
 
     if (
@@ -35,7 +37,16 @@ export default function Signup(props) {
     }
 
     if (validateEmail(userDetails.email)) {
-      toast.success("Registered Succesfully");
+      let response = await register(userDetails);
+      if (response.success) {
+        localStorage.setItem("token", response.data.data);
+        toast.success("Registered Succesfully");
+        window.location.href = "/dashboard";
+      }
+
+      if (response.message && response.message === "User Already exists") {
+        toast.error("Email already exists ");
+      }
     } else {
       toast.error("Please enter valid email");
       return;

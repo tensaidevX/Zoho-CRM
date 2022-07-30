@@ -1,34 +1,6 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
-//signup
-function createUser(userDetails) {
-  let newUser = new User();
-  (newUser.name = userDetails.name), (newUser.email = userDetails.email);
-  // Call setPassword function to hash password
-  newUser.setPassword(userDetails.password);
-
-  try {
-    newUser.save(function (err, user) {
-      if (err) {
-        return res.status(500).json({
-          message: "Internal Server Error",
-          success: false,
-        });
-      }
-      return res.json({
-        message: "user created succesfully ",
-        success: true,
-      });
-    });
-  } catch (error) {
-    console.log(error, "error while creating user ");
-    return res.json(500, {
-      message: "Internal Server Error",
-    });
-  }
-}
-
 module.exports.userSignup = function (req, res) {
   //check if request is  empty
   if (!req.body) {
@@ -38,9 +10,15 @@ module.exports.userSignup = function (req, res) {
     });
   }
 
-  let { email, password, confirmPassword } = req.body;
+  let { name, email, password, confirmPassword } = req.body;
   //check for input params
-  if (!email || !password || !confirmPassword || confirmPassword !== password) {
+  if (
+    !name ||
+    !email ||
+    !password ||
+    !confirmPassword ||
+    confirmPassword !== password
+  ) {
     return res.status(400).json({
       message: "Invalid Input",
       success: false,
@@ -57,7 +35,36 @@ module.exports.userSignup = function (req, res) {
       }
 
       if (!user) {
-        createUser(req.body);
+        let newUser = new User();
+        (newUser.name = name), (newUser.email = email);
+        // Call setPassword function to hash password
+        newUser.setPassword(password);
+
+        try {
+          newUser.save(function (err, user) {
+            if (err) {
+              return res.status(500).json({
+                message: "Internal Server Error",
+                success: false,
+              });
+            }
+
+            const token = jwt.sign(user.toJSON(), "zoho564", {
+              expiresIn: "100000",
+            });
+
+            return res.json({
+              message: "user created succesfully ",
+              data: token,
+              success: true,
+            });
+          });
+        } catch (error) {
+          console.log(error, "error while creating user ");
+          return res.json(500, {
+            message: "Internal Server Error",
+          });
+        }
       } else {
         return res.status(403).json({
           message: "User Already exists",
@@ -78,9 +85,17 @@ module.exports.createSession = async function (req, res) {
   try {
     var user = await User.findOne({ email: req.body.email });
 
+    if (!user) {
+      return res.status(400).send({
+        message: "User not Found",
+        success: false,
+        user: null,
+      });
+    }
+
     if (user.validPassword(req.body.password)) {
       const token = jwt.sign(user.toJSON(), "zoho564", {
-        expiresIn: "100000",
+        expiresIn: 100000,
       });
 
       return res.status(200).json({

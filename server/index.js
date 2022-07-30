@@ -5,7 +5,9 @@ const app = express();
 const db = require("./config/mongoose");
 require("./config/passport");
 const passport = require("passport");
+const cors = require("cors");
 
+app.use(cors());
 app.use(express.json()); // to parse JSON bodies
 
 app.use(express.urlencoded()); //Parse URL-encoded bodies

@@ -1,12 +1,21 @@
 import React from "react";
 
-function ProfileOptions() {
+function ProfileOptions(props) {
+  function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  }
+
   return (
     <div style={Styles.profileOptions}>
-      <div className='li-po' style={Styles.listItem}>
+      <div
+        className='li-po'
+        style={Styles.listItem}
+        onClick={() => props.getLeads()}
+      >
         Refresh Leads
       </div>
-      <div className='li-po' style={Styles.listItem}>
+      <div className='li-po' style={Styles.listItem} onClick={() => logout()}>
         Logout
       </div>
     </div>
@@ -18,11 +27,11 @@ export default ProfileOptions;
 const Styles = {
   profileOptions: {
     height: "max-content",
-    width: "150px",
+    width: "158px",
     backgroundColor: "white",
     position: "absolute",
     right: "28px",
-    top: "9vh",
+    top: "10vh",
     fontSize: "14px",
     fontWeight: "600",
     color: "gray",
@@ -34,9 +43,7 @@ const Styles = {
     alignItems: "center",
     height: "40px",
     width: "100%",
-    "&:hover": {
-      backgroundColor: "purple",
-    },
+
     cursor: "pointer",
   },
 };

@@ -1,20 +1,21 @@
+const UserModel = require("../models/user");
 const passportJWT = require("passport-jwt");
+const passport = require("passport");
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
+
+var opts = {};
+opts.jwtFromRequest = ExtractJWT.fromAuthHeaderWithScheme("Bearer");
+opts.secretOrKey = "zoho564";
+
 passport.use(
-  new JWTStrategy(
-    {
-      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: "zoho564",
-    },
-    function (jwtPayload, cb) {
-      return UserModel.findOneById(jwtPayload.id)
-        .then((user) => {
-          return cb(null, user);
-        })
-        .catch((err) => {
-          return cb(err);
-        });
-    }
-  )
+  new JWTStrategy(opts, function (jwtPayload, cb) {
+    return UserModel.findById(jwtPayload._id)
+      .then((user) => {
+        return cb(null, user);
+      })
+      .catch((err) => {
+        return cb(err);
+      });
+  })
 );

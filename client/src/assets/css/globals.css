@@ -41,7 +41,7 @@ main {
 }
 
 hr {
-  outline: none;
+  border: none;
   width: 95%;
   border-bottom: solid 2px #8080804d;
 }
