@@ -5,6 +5,8 @@ const axios = require("axios");
 // ZOHO CREDENTIALS FOR GETTING DATA - CREATED USING SELF CLIENT from ZOHO CONSOLE
 
 const REFRESH_TOKEN =
+  // "1000.77150d57da1bcc5282e54cbff7ac70ff.4d699387124e71bf7d907dc4407ff5c5";
+
   "1000.77150d57da1bcc5282e54cbff7ac70ff.4d699387124e71bf7d907dc4407ff5c4";
 const CLIENT_ID = "1000.XQO5DXM8FA550TKI8VS08N6MYP6G9D";
 const CLIENT_SECRET = "3721b6d1142553c2560af69c1e0194a3728d3497e1";
@@ -40,7 +42,7 @@ async function getToken() {
       .then(function (response) {
         return response.data.access_token;
       })
-      .then((token) => getLeadsData(token))
+      .then((token) => getLeadsData(token)) //send access token to get leads data
       .then((response) => response)
       .then((data) => data)
       .catch((error) => {
@@ -68,11 +70,14 @@ async function getLeadsData(token) {
     },
   };
   try {
-    const response = axios(config)
+    const response = await axios(config)
       .then(function (response) {
         return response.data;
       })
       .catch((error) => console.log(error));
+    // .catch((error) => {
+    //   return { error: true };
+    // });
 
     return response;
   } catch (error) {
@@ -118,27 +123,5 @@ module.exports.getLeads = async function (req, res) {
         message: "Internal Server Error",
       });
     }
-  } else {
-    //setTimout fallback for  ZOHO CRM error and return previous data from MONGODB
-    var timeout_id = setTimeout(() => {
-      let lead = Lead.findOne({ $query: {}, $orderby: { $natural: -1 } })
-        .then((lead) => {
-          return res.status(303).json({
-            leads: lead.leads,
-            createdAt: lead.createdAt,
-            source_data: lead.source_data,
-            message: "cannot connect to ZOHO",
-            success: false,
-          });
-        })
-        .catch((err) => {
-          console.log(error);
-          return res.status(500).json({
-            message: "Internal Server Error", //if everything fails
-            serverError: true, //send client to Page 404
-            success: false,
-          });
-        });
-    }, 100000);
   }
 };
