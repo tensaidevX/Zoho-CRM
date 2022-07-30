@@ -8,6 +8,10 @@ const LeadSchema = new mongoose.Schema({
     type: Object,
     required: true,
   },
+  createdAt: {
+    type: String,
+    required: true,
+  },
 });
 
 const Lead = mongoose.model("Lead", LeadSchema);

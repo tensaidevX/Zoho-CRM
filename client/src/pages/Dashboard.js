@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from "react";
-import styles from "../assets/css/dashboard.module.css";
+import styles from "../assets/css/dashboard.module.css"; //css file
+//components
 import Table from "../components/Table";
 import Chart from "../components/Chart";
 import ProfileOptions from "../components/ProfileOptions";
 import Loader from "../components/Loader";
+//helper functions
 import { getLeads } from "../api";
 function Dashboard(props) {
+  //state
+
   let [index, setIndex] = useState({
     min: 0,
     max: 10,
-  });
+  }); //1. set data index  of table
 
-  let [leads, setLeads] = useState();
-  let [pageNumber, setInputPageNumber] = useState(1);
-  let [showProfileopts, setShowProfileOpts] = useState(false);
+  let [leads, setLeads] = useState(); //2.  lead data in state
+  let [pageNumber, setInputPageNumber] = useState(1); //3. set Page number to display on table
+  let [showProfileopts, setShowProfileOpts] = useState(false); //4. state to handle profile options display
+
+  //handle show next table data
   function handleNext() {
     if (index.max >= leads.leads.length) {
       return;
@@ -21,7 +27,7 @@ function Dashboard(props) {
     setIndex((prev) => ({ min: prev.min + 10, max: prev.max + 10 }));
     setInputPageNumber(pageNumber + 1);
   }
-
+  // handle show previous table data
   function handlePrev() {
     if (index.min <= 0) {
       return;
@@ -29,21 +35,30 @@ function Dashboard(props) {
     setIndex((prev) => ({ min: prev.min - 10, max: prev.max - 10 }));
     setInputPageNumber(pageNumber - 1);
   }
-
+  //get lead data on component load
   useEffect(() => {
     async function getLeadData() {
       let response = await getLeads();
       if (response.success) {
         setLeads(response.data.data);
       }
+      //if client has unauthorized token
       if (response.message && response.message.includes("Unexpected token")) {
         localStorage.removeItem("token");
         window.location.href = "/";
       }
+      //if ZOHO internal server error occured
+      if (response.message === "cannot connect to ZOHO") {
+        setLeads(response.data.data);
+      }
+
+      if (response.serverError) {
+        window.location.href = "/404";
+      }
     }
     getLeadData();
   }, []);
-
+  //handle refresh lead data
   async function refreshLeadsData() {
     setLeads(null);
     let response = await getLeads();
@@ -79,12 +94,26 @@ function Dashboard(props) {
       <div className={styles.main}>
         <div className={styles.dashboardWrapper}>
           <div className={styles.data}>
-            <h3 className={styles.identifier}>Your Leads</h3>
-
+            {/* show lead data identifier and last updated  */}
+            <div
+              className={styles.identifier}
+              style={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <span style={{ fontSize: "1.2rem", fontWeight: "700" }}>
+                Your Leads
+              </span>
+              <span
+                style={{ fontSize: "14px", color: "blue", fontWeight: "400" }}
+              >
+                Last Updated On: {leads ? leads.createdAt.split("T")[0] : null}
+              </span>
+            </div>
+            {/* Table Component */}
             <div className={leads ? styles.table : styles.loadingTable}>
               {leads ? (
                 <>
                   <Table index={index} data={leads.leads} />
+                  {/* Table options */}
                   <div className={styles.tableOptions}>
                     <button
                       className={styles.loginBtn}
@@ -138,12 +167,14 @@ function Dashboard(props) {
                 <Loader />
               )}
             </div>
+            {/* Chart component */}
             <h3 className={styles.identifier}>Lead Sources</h3>
 
             <div className={leads ? styles.chart : styles.loadingChart}>
               {leads ? <Chart data={leads.source_data} /> : <Loader />}
             </div>
           </div>
+          {/* Tile component */}
           <div className={styles.tile}>
             <span>{leads ? leads.leads.length : "NA"}</span>
             <span style={{ fontSize: "20px" }}>Total Leads</span>

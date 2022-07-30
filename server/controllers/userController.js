@@ -26,6 +26,7 @@ module.exports.userSignup = function (req, res) {
   }
 
   try {
+    //if user already exists
     User.findOne({ email: email }, function (err, user) {
       if (err) {
         return res.status(500).json({
@@ -66,6 +67,7 @@ module.exports.userSignup = function (req, res) {
           });
         }
       } else {
+        //user already exist
         return res.status(403).json({
           message: "User Already exists",
           success: false,
@@ -92,7 +94,7 @@ module.exports.createSession = async function (req, res) {
         user: null,
       });
     }
-
+    //if password is valid
     if (user.validPassword(req.body.password)) {
       const token = jwt.sign(user.toJSON(), "zoho564", {
         expiresIn: 100000,

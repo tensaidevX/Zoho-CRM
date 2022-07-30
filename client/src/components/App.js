@@ -13,7 +13,7 @@ function PrivateRoute(props) {
 
 function RestrictedRoute(props) {
   if (props.user) {
-    return <Navigate to='/' />;
+    return <Navigate to='/dashboard' />;
   } else {
     return props.children;
   }

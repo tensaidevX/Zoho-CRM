@@ -1,6 +1,7 @@
 import React from "react";
-
+//profile dropdown
 function ProfileOptions(props) {
+  //handle logout button
   function logout() {
     localStorage.removeItem("token");
     window.location.href = "/";
@@ -23,7 +24,7 @@ function ProfileOptions(props) {
 }
 
 export default ProfileOptions;
-
+//custom styles
 const Styles = {
   profileOptions: {
     height: "max-content",

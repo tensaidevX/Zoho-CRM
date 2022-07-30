@@ -6,6 +6,7 @@ const ExtractJWT = passportJWT.ExtractJwt;
 
 var opts = {};
 opts.jwtFromRequest = ExtractJWT.fromAuthHeaderWithScheme("Bearer");
+//secret key to decode JWT will be hidden in production using env
 opts.secretOrKey = "zoho564";
 
 passport.use(

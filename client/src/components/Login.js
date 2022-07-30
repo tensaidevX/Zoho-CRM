@@ -1,16 +1,20 @@
 import { useState } from "react";
+//components
 import { toast, Toaster } from "react-hot-toast";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import styles from "../assets/css/login.module.css";
+//helper function
 import { validateEmail } from "../utils";
 import { login } from "../api";
+//css
+import styles from "../assets/css/login.module.css";
+
 export default function Login(props) {
   let [userDetails, setUserDetails] = useState({
     email: "",
     password: "",
   });
-
+  //handle change in input values -- controlled input form
   function handleInputChange(event) {
     const { name, value } = event.target;
     setUserDetails((prevState) => ({
@@ -18,7 +22,7 @@ export default function Login(props) {
       [name]: value,
     }));
   }
-
+  //handle submit login form
   async function handleSubmit() {
     let { email, password } = userDetails;
 
@@ -26,7 +30,7 @@ export default function Login(props) {
       toast.error("Please enter valid details ");
       return;
     }
-
+    //validate email address
     if (validateEmail(userDetails.email)) {
       let response = await login(userDetails);
       if (response.success) {

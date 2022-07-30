@@ -1,3 +1,4 @@
+/* CSS file for dashboard page */
 .dashboard {
   height: 100%;
   width: 100%;
@@ -6,6 +7,7 @@
   flex-direction: column;
 }
 
+/* NAVBAR  */
 .nav {
   justify-content: space-between;
   align-items: center;
@@ -48,6 +50,7 @@
   width: 35px;
   border-radius: 20%;
 }
+/* MAIN SECTION */
 .main {
   display: flex;
   width: 100vw;
@@ -70,10 +73,10 @@
   flex-direction: column;
   margin: 20px 40px 20px 30px;
 }
-
+/* TILE SECTION */
 .tile {
-  margin-top: 40px;
-  width: 150px;
+  margin-top: 80px;
+  min-width: 150px;
   height: 150px;
   display: flex;
   font-size: 2rem;
@@ -95,11 +98,13 @@
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+/* TABLE  */
 .table {
   height: max-content;
   width: max-content;
 }
 
+/* CSS WHEN TABLE IS LOADING  */
 .loadingTable {
   margin-left: 10px;
   border-radius: 20px;
@@ -110,7 +115,7 @@
   justify-content: center;
   align-items: center;
 }
-
+/* CSS WHEN CHART IS LOADING */
 .loadingChart {
   margin-top: 10px;
   margin-left: 10px;
@@ -122,7 +127,7 @@
   justify-content: center;
   align-items: center;
 }
-
+/* TABLE OPTIONS */
 .tableOptions {
   display: flex;
   justify-content: center;

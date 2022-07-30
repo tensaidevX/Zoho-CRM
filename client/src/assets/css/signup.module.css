@@ -1,3 +1,4 @@
+/* SIGNUP FORM CSS */
 .signupForm {
   display: flex;
   margin-top: 40px;
@@ -38,17 +39,18 @@
   border-bottom: solid 2px rgba(207, 205, 205, 0.468);
 }
 
+/* ERROR MESSAGE CSS */
 .errorMessage {
   width: 85%;
   text-align: left;
   color: red;
-  font-size: 10px;
+  font-size: 13px;
   font-family: Helvetica, sans-serif;
   animation: fadeInAnimation ease 0.5s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
-
+/* ERROR ANIMATION */
 @keyframes fadeInAnimation {
   0% {
     opacity: 0;

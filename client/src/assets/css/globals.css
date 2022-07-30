@@ -1,3 +1,10 @@
+*,
+::before,
+::after {
+  margin: 0px;
+  padding: 0px;
+}
+
 body {
   margin: 0;
   background-color: whitesmoke;
@@ -8,7 +15,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -21,6 +27,7 @@ main {
   justify-content: center;
   display: flex;
 }
+
 .main-description {
   height: 100%;
   display: flex;
@@ -33,12 +40,6 @@ main {
 .main-description h1 {
   font-family: Helvetica, sans-serif;
 }
-*,
-::before,
-::after {
-  margin: 0px;
-  padding: 0px;
-}
 
 hr {
   border: none;
@@ -48,8 +49,31 @@ hr {
 
 .li-po:hover {
   background-color: rgba(128, 0, 128, 0.635);
+
+  background: -webkit-linear-gradient(
+    to right,
+    #4255fd,
+    #fe5a8e
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #3848d8, #da3d6f);
   color: white;
 }
 .li-po:nth-child(2) {
   border-radius: 0px 0px 10px 10px;
+}
+
+/* MEDIA QUERIES  */
+
+@media only screen and (max-width: 800px) {
+  body {
+    overflow-x: scroll;
+  }
+  .main-description img {
+    height: 200px;
+    width: 400px;
+  }
+  main {
+    height: max-content;
+    flex-direction: column;
+  }
 }

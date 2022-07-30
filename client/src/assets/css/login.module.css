@@ -1,22 +1,4 @@
-.inputField {
-  display: flex;
-  margin-top: 10px;
-  justify-content: center;
-  align-items: center;
-  width: 85%;
-}
-
-.inputField:nth-child(1) {
-  margin-top: 40px;
-}
-.inputField div {
-  width: 100%;
-}
-
-.loginBtn {
-  margin-top: 20px !important;
-  width: 85%;
-}
+/* LOGIN CSS */
 
 .loginWrapper {
   z-index: 10;
@@ -40,11 +22,37 @@
   background-color: white;
 }
 
+.inputField {
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+}
+
+.inputField:nth-child(1) {
+  margin-top: 40px;
+}
+.inputField div {
+  width: 100%;
+}
+
+.loginBtn {
+  margin-top: 20px !important;
+  width: 85%;
+}
+/* Animate Login Component */
 @keyframes popup {
   0% {
     opacity: 0.2;
   }
   100% {
     opacity: 1;
+  }
+}
+/* MEDIA QUERY */
+@media only screen and (max-width: 800px) {
+  .loginWrapper {
+    height: 200vh;
   }
 }

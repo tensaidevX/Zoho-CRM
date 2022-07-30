@@ -2,10 +2,12 @@ import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import styles from "../assets/css/signup.module.css";
+
+import styles from "../assets/css/signup.module.css"; //css file
+//helper functions
 import { validateEmail } from "../utils";
 import { register } from "../api";
-
+//signup component
 export default function Signup(props) {
   let [userDetails, setUserDetails] = useState({
     name: "",
@@ -13,7 +15,7 @@ export default function Signup(props) {
     password: "",
     confirmPassword: "",
   });
-
+  //handle input change ---> controlled input
   function handleInputChange(event) {
     const { name, value } = event.target;
     setUserDetails((prevState) => ({
@@ -22,6 +24,7 @@ export default function Signup(props) {
     }));
   }
 
+  //handle submit button
   async function handleSubmit() {
     let { email, password, confirmPassword, name } = userDetails;
 
@@ -35,7 +38,7 @@ export default function Signup(props) {
       toast.error("Please enter valid details ");
       return;
     }
-
+    //validate email
     if (validateEmail(userDetails.email)) {
       let response = await register(userDetails);
       if (response.success) {
@@ -57,6 +60,8 @@ export default function Signup(props) {
     <>
       <Toaster position='top-center' reverseOrder={false} />
       <div className={styles.signupForm}>
+        {/* Name input */}
+
         <div className={styles.inputField}>
           <TextField
             id='outlined-basic'
@@ -69,6 +74,7 @@ export default function Signup(props) {
             }}
           />
         </div>
+        {/* Email Input  */}
         <div className={styles.inputField}>
           <TextField
             id='outlined-basic'
@@ -81,6 +87,7 @@ export default function Signup(props) {
             }}
           />
         </div>
+        {/* Password input  */}
         <div className={styles.inputField}>
           <TextField
             type='password'
@@ -100,6 +107,7 @@ export default function Signup(props) {
             Password must not be less than 8 characters
           </p>
         ) : null}
+        {/* Confirm Password */}
         <div className={styles.inputField}>
           <TextField
             id='outlined-basic'
@@ -120,6 +128,7 @@ export default function Signup(props) {
             Password and Confirm Password Must be Same
           </p>
         ) : null}
+        {/* register button  */}
         <Button
           variant='contained'
           onClick={() => {
@@ -130,6 +139,7 @@ export default function Signup(props) {
         </Button>
         <hr />
         <p>Existing User ?</p>
+        {/* login button --> open login form */}
         <Button
           className={styles.loginBtn}
           variant='text'

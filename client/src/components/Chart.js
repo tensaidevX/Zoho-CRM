@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Chart, registerables } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import Styles from "../assets/css/chart.module.css";
+import Styles from "../assets/css/chart.module.css"; //css
 Chart.register(...registerables);
 
+//Chart Component
 const DynamicChart = (props) => {
   let [leadSources, setLeadSources] = useState([]);
   let [leadSourceValues, setleadSourceValues] = useState([]);
@@ -22,6 +23,7 @@ const DynamicChart = (props) => {
   }, [props.data]);
 
   useEffect(() => {
+    // set data of chart
     setChartData({
       labels: leadSources,
       datasets: [
@@ -93,6 +95,7 @@ const DynamicChart = (props) => {
       <h1>Top Lead Sources</h1>
       <div className={Styles.chart}>
         {chartData.datasets ? (
+          //  bar component
           <Bar
             data={chartData}
             options={{

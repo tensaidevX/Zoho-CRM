@@ -1,6 +1,8 @@
 import { useState } from "react";
+//components
 import Signup from "../components/Signup";
 import Login from "../components/Login";
+//HOME component
 export default function Home() {
   let [loginEnable, setLoginEnable] = useState(false);
   const handleShowLogin = () => {

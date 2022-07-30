@@ -1,5 +1,5 @@
 const ROOT = "http://localhost:8000/api/v1";
-
+//API URLS
 export const API_URLS = {
   getLeads: () => {
     return `${ROOT}/leads/`;
